@@ -9,13 +9,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ROLE_NORMAL = 'normal';
+    const ROLE_GOVERNMENT = 'government';
+    const ROLE_POLICE = 'police';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role'
     ];
 
     /**
@@ -30,5 +34,14 @@ class User extends Authenticatable
     public function license(){
         $this->hasOne(License::class);
     }
+
+    public function isGovernment(){
+        return $this->role == self::ROLE_GOVERNMENT;
+    }
+
+    public function isPolice(){
+        return $this->role == self::ROLE_POLICE;
+    }
+
 
 }

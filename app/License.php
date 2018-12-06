@@ -8,7 +8,11 @@ class License extends Model
 {
 
     protected $fillable = [
-        'address', 'point',
+        'user_id','address', 'point',
     ];
+
+    public function User(){
+        $this->hasOne(User::class);
+    }
 
 }
