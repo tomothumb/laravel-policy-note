@@ -19,7 +19,8 @@ class LicensePolicy
      */
     public function view(User $user, License $license)
     {
-        //
+        // 誰でも確認できる
+        return true;
     }
 
     /**
@@ -30,7 +31,8 @@ class LicensePolicy
      */
     public function create(User $user)
     {
-        //
+        // 試験場のみが免許証を発行できる
+        return $user->isGovernment();
     }
 
     /**
@@ -42,7 +44,8 @@ class LicensePolicy
      */
     public function update(User $user, License $license)
     {
-        //
+        // 試験場(政府)か警察官なら更新できる
+        return $user->isGovernment() || $user->isPolice();
     }
 
     /**
@@ -54,6 +57,7 @@ class LicensePolicy
      */
     public function delete(User $user, License $license)
     {
-        //
+        // 試験場(政府)なら無条件で。警察官ならその免許証が0点になれば免許取り消しになる。
+        return $user->isGovernment() || ($user->isPolice() && $license->point <= 0);
     }
 }
