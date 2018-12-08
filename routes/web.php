@@ -33,3 +33,5 @@ Route::get('/license/updatePolice', 'LicenseController@updatePolice');
 Route::get('/license/deletePolice', 'LicenseController@deletePolice');
 Route::get('/license/deletePoliceAfterZeroPoint', 'LicenseController@deletePoliceAfterZeroPoint');
 
+Route::get('/sample/allow', 'SampleController@sample_allow');
+Route::get('/sample/deny', 'SampleController@sample_deny');
